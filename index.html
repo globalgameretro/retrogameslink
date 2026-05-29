@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Retro Library Index</title>
+    <!-- Chặn các công cụ tìm kiếm index trang -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-decor">
+        <div class="glow-sphere sphere-1"></div>
+        <div class="glow-sphere sphere-2"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="icon">🎮</span>
+                <h1>Classic Retro Library</h1>
+            </div>
+            <p class="subtitle">Hướng dẫn nhập thư viện trò chơi cổ điển vào ứng dụng của bạn</p>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="main-grid">
+            <!-- Step 1: Copy Link Section -->
+            <section class="card import-card">
+                <h2>1. Sao chép liên kết thư viện</h2>
+                <p class="card-desc">Sử dụng liên kết dưới đây để nạp toàn bộ danh mục game trực tuyến vào ứng dụng giả lập.</p>
+                
+                <div class="link-box">
+                    <input type="text" id="catalog-url" readonly value="Đang tải link...">
+                    <button id="copy-btn" class="btn btn-primary">Sao chép</button>
+                </div>
+                <div id="copy-status" class="status-msg">Đã sao chép vào bộ nhớ tạm!</div>
+            </section>
+
+            <!-- Step 2: Instructions -->
+            <section class="card instruction-card">
+                <h2>2. Hướng dẫn nhập vào ứng dụng</h2>
+                <div class="steps-list">
+                    <div class="step-item">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <h3>Sao chép liên kết</h3>
+                            <p>Nhấp vào nút "Sao chép" ở ô bên cạnh để sao chép liên kết file JSON.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <h3>Mở Ứng Dụng Giả Lập</h3>
+                            <p>Mở ứng dụng Retro Emulator trên điện thoại Android của bạn.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <h3>Dán liên kết & Đồng bộ</h3>
+                            <p>Vào phần Cài đặt nguồn game trực tuyến, dán liên kết vừa copy và chọn "Đồng bộ". Hệ thống sẽ tự động hiển thị danh mục game và cho phép tải về để chơi trực tiếp.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Base64 Helper for Admin -->
+            <section class="card admin-card full-width">
+                <div class="admin-header">
+                    <h2>🛠️ Công cụ mã hóa liên kết (Dành cho Quản trị viên)</h2>
+                    <p>Dùng công cụ này để chuyển đổi link tải game (ROM) trực tiếp sang mã Base64 trước khi điền vào file <code>games.json</code> để né bot quét.</p>
+                </div>
+                
+                <div class="tool-grid">
+                    <div class="input-group">
+                        <label for="raw-url">Nhập Link tải trực tiếp (Direct Link):</label>
+                        <input type="url" id="raw-url" placeholder="https://example.com/games/mario.zip">
+                    </div>
+                    <div class="action-group">
+                        <button id="encode-btn" class="btn btn-accent">Mã hóa sang Base64 ➡️</button>
+                    </div>
+                    <div class="input-group">
+                        <label for="base64-result">Mã Base64 thu được:</label>
+                        <div class="result-box">
+                            <input type="text" id="base64-result" readonly placeholder="Mã Base64 sẽ hiển thị ở đây">
+                            <button id="copy-result-btn" class="btn btn-secondary">Copy</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="example-json-preview">
+                    <h3>Cấu trúc mẫu trong file <code>games.json</code>:</h3>
+                    <pre><code>{
+  "title": "Tên Game",
+  "system": "snes", <span class="comment">// snes, nes, gba, gbc, genesis, etc.</span>
+  "downloadUrl": "MÃ_BASE64_Ở_TRÊN",
+  "coverUrl": "https://link-anh-bia.png"
+}</code></pre>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Trang web lưu trữ thư viện nội bộ. Được bảo mật và không thu thập thông tin người dùng.</p>
+            <p class="disclaimer">Tuyên bố miễn trừ trách nhiệm: Chúng tôi không sở hữu hay trực tiếp lưu trữ các tệp trò chơi. Mọi tệp tin hiển thị đều được cung cấp bởi các bên lưu trữ công cộng phục vụ mục đích nghiên cứu học tập.</p>
+        </footer>
+    </div>
+
+    <!-- JS Link -->
+    <script src="script.js"></script>
+</body>
+</html>
