@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (isLocal) {
         // Fallback mock url for local testing
-        catalogUrl = "https://kiromakeweb.github.io/retrogameslink/games.json";
+        catalogUrl = "https://globalgameretro.github.io/retrogameslink/games.json";
     } else {
         // Compute path based on current domain and path (works for github pages)
         const cleanPath = window.location.pathname.endsWith("/") 
