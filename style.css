@@ -1,18 +1,18 @@
-/* Modern Glassmorphic Dark Theme */
+/* Modern Glassmorphic Dark Blue & Black Theme */
 
 :root {
-    --bg-dark: #09080f;
-    --bg-card: rgba(18, 16, 29, 0.65);
-    --border-color: rgba(147, 51, 234, 0.25);
-    --border-hover: rgba(147, 51, 234, 0.45);
-    --text-primary: #f3f4f6;
-    --text-secondary: #9ca3af;
-    --primary-color: #9333ea;
-    --primary-hover: #a855f7;
-    --accent-color: #06b6d4;
-    --accent-hover: #22d3ee;
+    --bg-dark: #020617; /* Deep Slate Black */
+    --bg-card: rgba(15, 23, 42, 0.7); /* Deep Navy-Slate Blue with opacity */
+    --border-color: rgba(59, 130, 246, 0.2); /* Blue border */
+    --border-hover: rgba(56, 189, 248, 0.45); /* Cyan border on hover */
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --primary-color: #2563eb; /* Neon Royal Blue */
+    --primary-hover: #3b82f6;
+    --accent-color: #0d9488; /* Teal Accent */
+    --accent-hover: #0f766e;
     --success-color: #10b981;
-    --glow-color: rgba(147, 51, 234, 0.15);
+    --glow-color: rgba(37, 99, 235, 0.15);
 }
 
 * {
@@ -55,7 +55,7 @@ body {
 .sphere-1 {
     width: 450px;
     height: 450px;
-    background: radial-gradient(circle, #7c3aed 0%, rgba(124, 58, 237, 0) 70%);
+    background: radial-gradient(circle, #1d4ed8 0%, rgba(29, 78, 216, 0) 70%); /* Deep Blue */
     top: -100px;
     left: -100px;
 }
@@ -63,7 +63,7 @@ body {
 .sphere-2 {
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, #0891b2 0%, rgba(8, 145, 178, 0) 70%);
+    background: radial-gradient(circle, #0369a1 0%, rgba(3, 105, 161, 0) 70%); /* Ocean Teal/Cyan */
     bottom: -150px;
     right: -150px;
     animation-delay: -10s;
@@ -118,7 +118,7 @@ body {
 .logo h1 {
     font-size: 2.75rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #f3f4f6 20%, #a855f7 100%);
+    background: linear-gradient(135deg, #f8fafc 20%, #3b82f6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.03em;
@@ -153,7 +153,7 @@ body {
     border: 1px solid var(--border-color);
     border-radius: 20px;
     padding: 2.25rem;
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.05);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
@@ -162,7 +162,7 @@ body {
 .card:hover {
     transform: translateY(-4px);
     border-color: var(--border-hover);
-    box-shadow: 0 15px 35px -5px rgba(124, 58, 237, 0.15), 0 10px 30px -10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 35px -5px rgba(59, 130, 246, 0.15), 0 10px 30px -10px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 .card h2 {
@@ -191,8 +191,8 @@ body {
 .link-box, .result-box {
     display: flex;
     gap: 0.75rem;
-    background: rgba(9, 8, 15, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(2, 6, 23, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 12px;
     padding: 0.5rem;
     align-items: center;
@@ -229,13 +229,13 @@ input::placeholder {
 .btn-primary {
     background: var(--primary-color);
     color: #fff;
-    box-shadow: 0 4px 14px rgba(147, 51, 234, 0.4);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
 }
 
 .btn-primary:hover {
     background: var(--primary-hover);
     transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(147, 51, 234, 0.6);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.6);
 }
 
 .btn-secondary {
@@ -248,15 +248,15 @@ input::placeholder {
 }
 
 .btn-accent {
-    background: var(--accent-color);
-    color: #000;
-    box-shadow: 0 4px 14px rgba(6, 182, 212, 0.4);
+    background: #0284c7; /* Sky Blue */
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
 }
 
 .btn-accent:hover {
-    background: var(--accent-hover);
+    background: #0ea5e9;
     transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(6, 182, 212, 0.6);
+    box-shadow: 0 6px 18px rgba(2, 132, 199, 0.6);
 }
 
 .btn:active {
@@ -291,7 +291,7 @@ input::placeholder {
 }
 
 .step-num {
-    background: rgba(147, 51, 234, 0.15);
+    background: rgba(59, 130, 246, 0.15);
     border: 1px solid var(--border-color);
     color: var(--primary-hover);
     width: 32px;
@@ -320,7 +320,7 @@ input::placeholder {
 
 /* Admin / Tool Section */
 .admin-card {
-    border-left: 4px solid var(--accent-color);
+    border-left: 4px solid var(--primary-hover);
 }
 
 .admin-header {
@@ -365,7 +365,7 @@ input::placeholder {
 }
 
 .input-group input {
-    background: rgba(9, 8, 15, 0.8);
+    background: rgba(2, 6, 23, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     padding: 0.75rem 1rem;
@@ -377,8 +377,8 @@ input::placeholder {
 }
 
 .input-group input:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 10px rgba(6, 182, 212, 0.1);
+    border-color: var(--primary-hover);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.1);
 }
 
 .action-group {
@@ -392,7 +392,7 @@ input::placeholder {
 }
 
 .example-json-preview {
-    background: rgba(9, 8, 15, 0.85);
+    background: rgba(2, 6, 23, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     padding: 1.25rem;
@@ -410,11 +410,11 @@ input::placeholder {
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.85rem;
     line-height: 1.5;
-    color: #d1d5db;
+    color: #cbd5e1;
 }
 
 .example-json-preview .comment {
-    color: #6b7280;
+    color: #64748b;
     font-style: italic;
 }
 
@@ -435,6 +435,6 @@ input::placeholder {
     max-width: 800px;
     margin: 0 auto;
     font-size: 0.75rem;
-    color: #4b5563;
+    color: #475569;
     line-height: 1.5;
 }
