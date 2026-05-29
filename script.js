@@ -90,4 +90,13 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Failed to copy results: ", err);
         });
     });
+
+    // 3. Show Admin Section only if query param ?admin=true is present
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("admin") === "true") {
+        const adminCard = document.getElementById("admin-card");
+        if (adminCard) {
+            adminCard.classList.remove("hidden");
+        }
+    }
 });

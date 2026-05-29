@@ -438,3 +438,90 @@ input::placeholder {
     color: #475569;
     line-height: 1.5;
 }
+
+/* Helper class for hidden elements */
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 600px) {
+    .container {
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
+    }
+
+    .logo h1 {
+        font-size: 2rem;
+    }
+
+    .logo .icon {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .card {
+        padding: 1.5rem 1.25rem;
+        border-radius: 16px;
+    }
+
+    .card h2 {
+        font-size: 1.3rem;
+    }
+
+    .link-box {
+        flex-direction: column;
+        background: transparent;
+        border: none;
+        padding: 0;
+        gap: 0.75rem;
+        align-items: stretch;
+    }
+
+    .link-box input {
+        background: rgba(2, 6, 23, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 0.85rem 1rem;
+        font-size: 0.9rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn {
+        padding: 0.85rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 12px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 48px;
+    }
+
+    .step-item {
+        gap: 0.75rem;
+    }
+
+    .step-num {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+    }
+
+    .step-content h3 {
+        font-size: 0.95rem;
+    }
+
+    .step-content p {
+        font-size: 0.85rem;
+    }
+
+    .footer {
+        padding-top: 1.5rem;
+        font-size: 0.8rem;
+    }
+}
