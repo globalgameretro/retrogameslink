@@ -134,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const editIndexInput = document.getElementById("edit-index");
     
     const gameTitleInput = document.getElementById("game-title");
+    const gameFilenameInput = document.getElementById("game-filename");
     const gameUrlInput = document.getElementById("game-url");
     const gameCoverInput = document.getElementById("game-cover");
     
@@ -289,7 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
         gamesCountSpan.innerText = localGamesList.length;
 
         if (localGamesList.length === 0) {
-            gamesTableBody.innerHTML = `<tr><td colspan="2" style="text-align: center; color: var(--text-secondary);">No games in library. Add your first game!</td></tr>`;
+            gamesTableBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">No games in library. Add your first game!</td></tr>`;
             return;
         }
 
@@ -297,6 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const tr = document.createElement("tr");
             tr.innerHTML = `
                 <td><strong>${escapeHtml(game.title)}</strong></td>
+                <td style="font-family: monospace; font-size: 0.8rem;">${escapeHtml(game.fileName || 'Not Set (Auto)')}</td>
                 <td class="actions-col">
                     <div class="action-btn-group">
                         <button class="btn btn-secondary edit-btn" data-index="${index}">Edit</button>
@@ -328,6 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         
         const title = gameTitleInput.value.trim();
+        const fileName = gameFilenameInput.value.trim() || null;
         const rawUrl = gameUrlInput.value.trim();
         const coverUrl = gameCoverInput.value.trim() || null;
         const editIndex = parseInt(editIndexInput.value);
@@ -342,6 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const gameObject = {
             title,
+            fileName,
             downloadUrl,
             coverUrl
         };
@@ -365,6 +369,7 @@ document.addEventListener("DOMContentLoaded", () => {
         editIndexInput.value = index;
         
         gameTitleInput.value = game.title;
+        gameFilenameInput.value = game.fileName || "";
         gameCoverInput.value = game.coverUrl || game.coverFrontUrl || game.cover || game.image || "";
         
         // Decrypt Base64 back to raw URL for developer editing
