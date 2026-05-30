@@ -73,38 +73,132 @@
                 </div>
             </section>
 
+            <!-- Live Game Preview Gallery -->
+            <section class="card gallery-card full-width">
+                <h2>📚 Browse Current Catalog Preview</h2>
+                <p class="card-desc">Here are the games currently available in your catalog. They will show up in your emulator once you import the link above.</p>
+                
+                <div id="gallery-loading" class="gallery-info">Loading games list...</div>
+                <div id="game-gallery" class="game-gallery-grid">
+                    <!-- Loaded dynamically via JS -->
+                </div>
+            </section>
+
             <!-- Base64 Helper for Admin -->
             <section id="admin-card" class="card admin-card full-width hidden">
                 <div class="admin-header">
-                    <h2>🛠️ Link Obfuscation Tool (Developer Only)</h2>
-                    <p>Convert direct download URLs (ROMs) into Base64 code before adding them to your <code>games.json</code> to keep them hidden from search bots.</p>
+                    <h2>🛠️ Catalog Management Console (Developer Only)</h2>
+                    <p>Load, add, edit, or delete items in <code>games.json</code> and save changes directly back to your GitHub repository.</p>
                 </div>
                 
-                <div class="tool-grid">
-                    <div class="input-group">
-                        <label for="raw-url">Enter Direct Download URL:</label>
-                        <input type="url" id="raw-url" placeholder="https://example.com/games/mario.zip">
-                    </div>
-                    <div class="action-group">
-                        <button id="encode-btn" class="btn btn-accent">Encode to Base64 ➡️</button>
-                    </div>
-                    <div class="input-group">
-                        <label for="base64-result">Resulting Base64 Code:</label>
-                        <div class="result-box">
-                            <input type="text" id="base64-result" readonly placeholder="Base64 code will appear here">
-                            <button id="copy-result-btn" class="btn btn-secondary">Copy</button>
+                <!-- Connection Panel -->
+                <div class="connection-panel">
+                    <div class="token-input-group">
+                        <label for="github-token">GitHub Personal Access Token:</label>
+                        <div class="token-wrapper">
+                            <input type="password" id="github-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+                            <button id="toggle-token-btn" class="btn btn-secondary">Show</button>
+                            <button id="save-token-btn" class="btn btn-primary">Connect</button>
+                            <button id="clear-token-btn" class="btn btn-secondary hidden">Disconnect</button>
                         </div>
                     </div>
+                    <div class="connection-status">
+                        <span class="status-indicator red" id="status-light"></span>
+                        <span id="status-text">Disconnected from GitHub</span>
+                    </div>
                 </div>
-                
-                <div class="example-json-preview">
-                    <h3>Structure sample in <code>games.json</code>:</h3>
-                    <pre><code>{
-  "title": "Game Title",
-  "system": "snes", <span class="comment">// snes, nes, gba, gbc, genesis, etc.</span>
-  "downloadUrl": "YOUR_BASE64_CODE_HERE",
-  "coverUrl": "https://link-to-cover.png"
-}</code></pre>
+
+                <!-- CMS Editor Area (Hidden until token is verified and repository is loaded) -->
+                <div id="cms-workspace" class="cms-workspace hidden">
+                    <div class="cms-actions-header">
+                        <button id="save-github-btn" class="btn btn-primary">💾 Save Changes to GitHub</button>
+                        <button id="reload-github-btn" class="btn btn-secondary">🔄 Reload from GitHub</button>
+                        <button id="download-json-btn" class="btn btn-secondary">📥 Download JSON File</button>
+                    </div>
+
+                    <div class="cms-editor-grid">
+                        <!-- Left: Games List -->
+                        <div class="games-list-panel">
+                            <h3>Current Games in Database (<span id="games-count">0</span>)</h3>
+                            <div class="table-wrapper">
+                                <table class="games-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>System</th>
+                                            <th>File Name</th>
+                                            <th class="actions-col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="games-table-body">
+                                        <!-- Loaded dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Right: Add/Edit Form -->
+                        <div class="game-form-panel">
+                            <h3 id="form-title">Add New Game</h3>
+                            <form id="game-form" onsubmit="return false;">
+                                <input type="hidden" id="edit-index" value="-1">
+                                
+                                <div class="form-group">
+                                    <label for="game-title">Game Title *</label>
+                                    <input type="text" id="game-title" required placeholder="Super Mario World">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="game-system">System *</label>
+                                    <select id="game-system" required>
+                                        <option value="" disabled selected>Select system...</option>
+                                        <option value="gba">Game Boy Advance (gba)</option>
+                                        <option value="nes">Nintendo NES (nes)</option>
+                                        <option value="snes">Super Nintendo SNES (snes)</option>
+                                        <option value="nds">Nintendo DS (nds)</option>
+                                        <option value="n64">Nintendo 64 (n64)</option>
+                                        <option value="3ds">Nintendo 3DS (3ds)</option>
+                                        <option value="gb">Game Boy (gb)</option>
+                                        <option value="gbc">Game Boy Color (gbc)</option>
+                                        <option value="psx">PlayStation 1 (psx)</option>
+                                        <option value="psp">PlayStation Portable (psp)</option>
+                                        <option value="md">Sega Genesis / Mega Drive (md)</option>
+                                        <option value="gg">Sega Game Gear (gg)</option>
+                                        <option value="sms">Sega Master System (sms)</option>
+                                        <option value="scd">Sega CD (scd)</option>
+                                        <option value="atari2600">Atari 2600 (atari2600)</option>
+                                        <option value="atari7800">Atari 7800 (atari7800)</option>
+                                        <option value="pce">PC Engine (pce)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="game-filename">File Name * (with extension)</label>
+                                    <input type="text" id="game-filename" required placeholder="smw.sfc">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="game-url">Direct ROM URL * (Raw URL - gets encrypted automatically)</label>
+                                    <input type="url" id="game-url" required placeholder="https://example.com/games/smw.zip">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="game-cover">Cover Image URL (optional)</label>
+                                    <input type="url" id="game-cover" placeholder="https://example.com/covers/smw.png">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="game-developer">Developer (optional)</label>
+                                    <input type="text" id="game-developer" placeholder="Nintendo">
+                                </div>
+
+                                <div class="form-buttons">
+                                    <button type="submit" id="submit-game-btn" class="btn btn-primary">Add Game</button>
+                                    <button type="button" id="cancel-edit-btn" class="btn btn-secondary hidden">Cancel Edit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
