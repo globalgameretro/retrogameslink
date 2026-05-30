@@ -125,8 +125,6 @@
                                     <thead>
                                         <tr>
                                             <th>Title</th>
-                                            <th>System</th>
-                                            <th>File Name</th>
                                             <th class="actions-col">Actions</th>
                                         </tr>
                                     </thead>
@@ -149,35 +147,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="game-system">System *</label>
-                                    <select id="game-system" required>
-                                        <option value="" disabled selected>Select system...</option>
-                                        <option value="gba">Game Boy Advance (gba)</option>
-                                        <option value="nes">Nintendo NES (nes)</option>
-                                        <option value="snes">Super Nintendo SNES (snes)</option>
-                                        <option value="nds">Nintendo DS (nds)</option>
-                                        <option value="n64">Nintendo 64 (n64)</option>
-                                        <option value="3ds">Nintendo 3DS (3ds)</option>
-                                        <option value="gb">Game Boy (gb)</option>
-                                        <option value="gbc">Game Boy Color (gbc)</option>
-                                        <option value="psx">PlayStation 1 (psx)</option>
-                                        <option value="psp">PlayStation Portable (psp)</option>
-                                        <option value="md">Sega Genesis / Mega Drive (md)</option>
-                                        <option value="gg">Sega Game Gear (gg)</option>
-                                        <option value="sms">Sega Master System (sms)</option>
-                                        <option value="scd">Sega CD (scd)</option>
-                                        <option value="atari2600">Atari 2600 (atari2600)</option>
-                                        <option value="atari7800">Atari 7800 (atari7800)</option>
-                                        <option value="pce">PC Engine (pce)</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="game-filename">File Name * (with extension)</label>
-                                    <input type="text" id="game-filename" required placeholder="smw.sfc">
-                                </div>
-
-                                <div class="form-group">
                                     <label for="game-url">Direct ROM URL or Telegram File ID * (gets encrypted automatically)</label>
                                     <input type="text" id="game-url" required placeholder="https://example.com/game.zip or Telegram File ID">
                                 </div>
@@ -185,11 +154,6 @@
                                 <div class="form-group">
                                     <label for="game-cover">Cover Image URL (optional)</label>
                                     <input type="url" id="game-cover" placeholder="https://example.com/covers/smw.png">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="game-developer">Developer (optional)</label>
-                                    <input type="text" id="game-developer" placeholder="Nintendo">
                                 </div>
 
                                 <div class="form-buttons">

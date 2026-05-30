@@ -72,13 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const card = document.createElement("div");
             card.className = "game-card";
             
-            // System badge styling
-            const badgeClass = `badge-${game.systemId}` || 'badge-default';
-            
             // Image cover or placeholder
+            const cover = game.coverFrontUrl || game.coverUrl || game.cover || game.image;
             let coverHtml = `<div class="game-cover-placeholder">🎮</div>`;
-            if (game.coverFrontUrl) {
-                coverHtml = `<img src="${game.coverFrontUrl}" alt="${game.title} cover" class="game-cover-img" onerror="this.style.display='none'; this.parentNode.innerHTML='🎮';">`;
+            if (cover) {
+                coverHtml = `<img src="${cover}" alt="${game.title} cover" class="game-cover-img" onerror="this.style.display='none'; this.parentNode.innerHTML='🎮';">`;
             }
             
             card.innerHTML = `
@@ -86,9 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     ${coverHtml}
                 </div>
                 <div class="game-card-info">
-                    <span class="game-card-system ${badgeClass}">${game.systemId}</span>
                     <h4 class="game-card-title" title="${game.title}">${game.title}</h4>
-                    <span class="game-card-dev" title="${game.developer || 'Unknown'}">${game.developer || 'Unknown Dev'}</span>
                 </div>
             `;
             gameGallery.appendChild(card);
@@ -138,11 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const editIndexInput = document.getElementById("edit-index");
     
     const gameTitleInput = document.getElementById("game-title");
-    const gameSystemSelect = document.getElementById("game-system");
-    const gameFilenameInput = document.getElementById("game-filename");
     const gameUrlInput = document.getElementById("game-url");
     const gameCoverInput = document.getElementById("game-cover");
-    const gameDeveloperInput = document.getElementById("game-developer");
     
     const submitGameBtn = document.getElementById("submit-game-btn");
     const cancelEditBtn = document.getElementById("cancel-edit-btn");
@@ -296,16 +289,14 @@ document.addEventListener("DOMContentLoaded", () => {
         gamesCountSpan.innerText = localGamesList.length;
 
         if (localGamesList.length === 0) {
-            gamesTableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">No games in library. Add your first game!</td></tr>`;
+            gamesTableBody.innerHTML = `<tr><td colspan="2" style="text-align: center; color: var(--text-secondary);">No games in library. Add your first game!</td></tr>`;
             return;
         }
 
         localGamesList.forEach((game, index) => {
             const tr = document.createElement("tr");
             tr.innerHTML = `
-                <td><strong>${escapeHtml(game.title)}</strong><br><small style="color: var(--text-secondary);">${escapeHtml(game.developer || 'No Dev')}</small></td>
-                <td><span class="game-card-system badge-${game.systemId}">${game.systemId}</span></td>
-                <td style="font-family: monospace; font-size: 0.8rem;">${escapeHtml(game.fileName)}</td>
+                <td><strong>${escapeHtml(game.title)}</strong></td>
                 <td class="actions-col">
                     <div class="action-btn-group">
                         <button class="btn btn-secondary edit-btn" data-index="${index}">Edit</button>
@@ -337,14 +328,11 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         
         const title = gameTitleInput.value.trim();
-        const systemId = gameSystemSelect.value;
-        const fileName = gameFilenameInput.value.trim();
         const rawUrl = gameUrlInput.value.trim();
-        const coverFrontUrl = gameCoverInput.value.trim() || null;
-        const developer = gameDeveloperInput.value.trim() || null;
+        const coverUrl = gameCoverInput.value.trim() || null;
         const editIndex = parseInt(editIndexInput.value);
 
-        if (!title || !systemId || !fileName || !rawUrl) {
+        if (!title || !rawUrl) {
             alert("Please fill out all required fields!");
             return;
         }
@@ -354,11 +342,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const gameObject = {
             title,
-            systemId,
-            fileName,
             downloadUrl,
-            coverFrontUrl,
-            developer
+            coverUrl
         };
 
         if (editIndex >= 0) {
@@ -380,10 +365,7 @@ document.addEventListener("DOMContentLoaded", () => {
         editIndexInput.value = index;
         
         gameTitleInput.value = game.title;
-        gameSystemSelect.value = game.systemId;
-        gameFilenameInput.value = game.fileName;
-        gameCoverInput.value = game.coverFrontUrl || "";
-        gameDeveloperInput.value = game.developer || "";
+        gameCoverInput.value = game.coverUrl || game.coverFrontUrl || game.cover || game.image || "";
         
         // Decrypt Base64 back to raw URL for developer editing
         gameUrlInput.value = decodeBase64(game.downloadUrl);
